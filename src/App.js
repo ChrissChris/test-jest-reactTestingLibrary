@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react"
+import "./App.css"
+
+const defautlItems = [
+  {
+    name: "Item A",
+  },
+  { name: "Item B" },
+  { name: "Item C" },
+]
 
 function App() {
+  const [name, setName] = useState("")
+  const [items, setItems] = useState(defautlItems)
+
+  const addItem = () => {
+    setItems([...items, { name }])
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <input
+        type="text"
+        placeholder="Please add you item..."
+        value={name}
+        onChange={(event) => setName(event.target.value)}
+      />
+      <button onClick={addItem}>Add Item</button>
+      {items.map((item) => {
+        return <div>{item.name}</div>
+      })}
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
